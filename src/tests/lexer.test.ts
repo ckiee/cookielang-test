@@ -21,7 +21,7 @@ test("it lexes comment", () => {
 
 test("it lexes keywords", () => {
     const tokens = new Lexer("const").lex();
-    expect(tokens).toEqual([{ match: "const", type: "keyword" }]);
+    expect(tokens).toEqual([{ match: "fn", type: "keyword" }]);
 });
 
 test("it lexes seperator", () => {

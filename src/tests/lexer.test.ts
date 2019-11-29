@@ -1,15 +1,4 @@
 import Lexer, { regexps } from "../lexer";
-const testedTypes = [
-    "comment",
-    "keyword",
-
-    "float",
-    "int",
-    "identifier",
-
-    "seperator",
-    "whitespace"
-];
 
 test("it lexes comment", () => {
     const tokens = new Lexer("//hello").lex();
@@ -21,18 +10,9 @@ test("it lexes comment", () => {
 
 test("it lexes keywords", () => {
     const tokens = new Lexer("fn").lex();
-    expect(tokens).toEqual([{ match: "fn", type: "keyword" }]);
+    expect(tokens).toEqual([{ match: "fn", type: "keywordFn" }]);
 });
 
-test("it lexes seperator", () => {
-    const tokens = new Lexer("(){}").lex();
-    expect(tokens).toEqual([
-        { match: "(", type: "seperator" },
-        { match: ")", type: "seperator" },
-        { match: "{", type: "seperator" },
-        { match: "}", type: "seperator" }
-    ]);
-});
 
 test("it lexes identifier", () => {
     const tokens = new Lexer("world").lex();
@@ -59,8 +39,4 @@ test("it lexes whitespace", () => {
 test("it ignores whitespace tokens", () => {
     const tokens = new Lexer("            \n\n    ", true).lex();
     expect(tokens).toEqual([]);
-});
-
-test("all token types are covered by tests", () => {
-    expect(testedTypes).toEqual(Object.keys(regexps));
 });

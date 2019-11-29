@@ -2,14 +2,20 @@ type RegexpMap = { [key: string]: RegExp };
 
 export const regexps = {
     comment: /^(\/\/.*)|(\/\*(.|[\n])*\*\/)/,
-    keyword: /^fn/,
 
+    // Keywords
+    keywordFn: /^fn/,
+    keywordMut: /^mut/,
     // Literals
     float: /^\d+\.\d+/,
     int: /^\d+/,
     identifier: /^\w+/,
-    //
-    seperator: /^(\(|\)|{|})/,
+    // Symbols
+    symbolOpenParen: /^\(/,
+    symbolCloseParen: /^\(/,
+    symbolOpenBrace: /^\{/,
+    symbolCloseBrace: /^\{/,
+
     whitespace: /^\s+/
 } as RegexpMap;
 

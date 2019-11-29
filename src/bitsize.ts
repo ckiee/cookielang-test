@@ -3,4 +3,4 @@ enum BitSize {
     B32,
     B64
 }
-export default BitSize
+export default BitSize;

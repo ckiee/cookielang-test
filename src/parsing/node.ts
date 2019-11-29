@@ -7,7 +7,7 @@ export enum NodeType {
 }
 
 export default abstract class Node {
-    type: NodeType
+    type: NodeType;
     constructor(type: NodeType) {
         this.type = type;
     }

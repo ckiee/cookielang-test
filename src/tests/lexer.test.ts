@@ -49,7 +49,6 @@ test("it lexes float", () => {
     expect(tokens).toEqual([{ match: "30.14", type: "float" }]);
 });
 
-
 test("it lexes whitespace", () => {
     const tokens = new Lexer("            \n\n    ").lex();
     expect(tokens).toEqual([

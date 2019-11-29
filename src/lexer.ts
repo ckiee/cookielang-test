@@ -24,6 +24,7 @@ export default class Lexer {
     debug: boolean = false;
     tokens: Token[] = [];
     ignoreWhitespace: boolean;
+    // TODO: Turn ignoreWhitespace into ignoreTokens: string (TokenType)[]
     constructor(data: string, ignoreWhitespace: boolean = false) {
         this.data = data;
         this.ignoreWhitespace = ignoreWhitespace;

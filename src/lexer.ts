@@ -3,7 +3,12 @@ type RegexpMap = { [key: string]: RegExp };
 export const regexps = {
     comment: /^(\/\/.*)|(\/\*(.|[\n])*\*\/)/,
     keyword: /^const/,
+
+    // Literals
+    float: /^\d+\.\d+/,
+    int: /^\d+/,
     identifier: /^\w+/,
+    //
     seperator: /^(\(|\)|{|})/,
     whitespace: /^\s+/
 } as RegexpMap;

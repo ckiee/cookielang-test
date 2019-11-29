@@ -20,7 +20,7 @@ test("it lexes comment", () => {
 });
 
 test("it lexes keywords", () => {
-    const tokens = new Lexer("const").lex();
+    const tokens = new Lexer("fn").lex();
     expect(tokens).toEqual([{ match: "fn", type: "keyword" }]);
 });
 

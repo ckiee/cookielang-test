@@ -12,7 +12,7 @@ beforeEach(() => {
 });
 
 test("it skips over tokens", () => {
-    ts.skipOver(TokenType.Identifier)
+    ts.skipOver(TokenType.Identifier);
     expect(ts.get()).toEqual({
         type: TokenType.Identifier,
         match: "world"
@@ -38,11 +38,11 @@ test("it gets the current token", () => {
 });
 
 test("it goes to the end of the tokenstream", () => {
-    ts.skip(2)
+    ts.skip(2);
     expect(ts.next()).toEqual(undefined);
 });
 
 test("it knows about the end", () => {
-    ts.skip(2)
+    ts.skip(2);
     expect(ts.hasNext()).toEqual(false);
 });

@@ -1,5 +1,5 @@
 import Node, { NodeType } from "./node";
-import BitSize from "../bitsize";
+import BitSize from "../util/bitsize";
 
 export default class Int extends Node {
     readonly size: BitSize;

@@ -1,5 +1,5 @@
-import { Token } from "./lexer";
-import TokenType from "./tokenType";
+import { Token } from "../lexing/lexer";
+import TokenType from "../lexing/tokenType";
 
 export default class TokenStream {
     data: Token[];

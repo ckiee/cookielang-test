@@ -1,5 +1,5 @@
-import Lexer, { Token } from "../lexer";
-import TokenType from "../tokenType";
+import Lexer, { Token } from "../lexing/lexer";
+import TokenType from "../lexing/tokenType";
 
 test("it lexes comment", () => {
     const tokens = new Lexer("// hello").lex();

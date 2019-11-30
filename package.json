@@ -14,7 +14,7 @@
     },
     "scripts": {
         "start": "ts-node src",
-        "repl": "ts-node src/repl",
+        "repl": "ts-node src/util/repl",
         "test": "jest"
     }
 }

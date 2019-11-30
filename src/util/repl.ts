@@ -1,8 +1,8 @@
 import readline from "readline";
-import Lexer from "./lexer";
-import Parser from "./parsing";
+import Lexer from "../lexing/lexer";
+import Parser from "../parsing";
 import TokenStream from "./tokenStream";
-import Node from "./parsing/node";
+import Node from "../parsing/node";
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout

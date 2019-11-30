@@ -1,10 +1,10 @@
-import TokenStream from "../tokenStream";
-import TokenType from "../tokenType";
+import TokenStream from "../util/tokenStream";
+import TokenType from "../lexing/tokenType";
 import Parser from "../parsing";
-import { Token } from "../lexer";
+import { Token } from "../lexing/lexer";
 import Type from "../parsing/type";
 import Int from "../parsing/int";
-import BitSize from "../bitsize";
+import BitSize from "../util/bitsize";
 import Prototype from "../parsing/prototype";
 import String from "../parsing/string";
 import Function from "../parsing/function";

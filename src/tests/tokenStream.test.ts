@@ -1,6 +1,6 @@
-import TokenStream from "../tokenStream";
-import TokenType from "../tokenType";
-import { Token } from "../lexer";
+import TokenStream from "../util/tokenStream";
+import TokenType from "../lexing/tokenType";
+import { Token } from "../lexing/lexer";
 let ts: TokenStream;
 
 beforeEach(() => {

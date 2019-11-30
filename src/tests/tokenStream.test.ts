@@ -1,4 +1,4 @@
-import TokenStream from "../tokenstream";
+import TokenStream from "../tokenStream";
 let ts: TokenStream;
 
 beforeEach(() => {

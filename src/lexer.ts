@@ -1,23 +1,4 @@
-type RegexpMap = { [key: string]: RegExp };
-
-export const regexps = {
-    comment: /^(\/\/.*)|(\/\*(.|[\n])*\*\/)/,
-
-    // Keywords
-    keywordFn: /^fn/,
-    keywordMut: /^mut/,
-    // Literals
-    float: /^\d+\.\d+/,
-    int: /^\d+/,
-    identifier: /^\w+/,
-    // Symbols
-    symbolOpenParen: /^\(/,
-    symbolCloseParen: /^\(/,
-    symbolOpenBrace: /^\{/,
-    symbolCloseBrace: /^\{/,
-
-    whitespace: /^\s+/
-} as RegexpMap;
+import TokenType, { getTokenTypeRegexp } from "./tokenType";
 
 export interface Token {
     type: string;
@@ -47,8 +28,8 @@ export default class Lexer {
 
             this.debugLog(this.i, char);
             let lexed = false;
-            for (const k of Object.keys(regexps)) {
-                const v = regexps[k];
+            for (const k of Object.values(TokenType)) {
+                const v = getTokenTypeRegexp(k);
                 const result = v.exec(unprocessed);
                 if (!result) continue;
                 const match = result[0];

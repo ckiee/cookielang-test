@@ -1,4 +1,4 @@
-import TokenStream from "../tokenstream";
+import TokenStream from "../tokenStream";
 import Int from "./int";
 import BitSize from "../bitsize";
 import Type from "./type";

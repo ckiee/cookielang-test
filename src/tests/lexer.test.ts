@@ -1,4 +1,4 @@
-import Lexer, { regexps } from "../lexer";
+import Lexer from "../lexer";
 
 test("it lexes comment", () => {
     const tokens = new Lexer("//hello").lex();
@@ -12,7 +12,6 @@ test("it lexes keywords", () => {
     const tokens = new Lexer("fn").lex();
     expect(tokens).toEqual([{ match: "fn", type: "keywordFn" }]);
 });
-
 
 test("it lexes identifier", () => {
     const tokens = new Lexer("world").lex();

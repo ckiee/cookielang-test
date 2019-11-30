@@ -24,9 +24,14 @@ test("it lexes int", () => {
     expect(tokens).toEqual([new Token(TokenType.Int, "1337")]);
 });
 
-test("it lexes float", () => {
+test("it lexes decimal", () => {
     const tokens = new Lexer("30.14").lex();
-    expect(tokens).toEqual([new Token(TokenType.Float, "30.14")]);
+    expect(tokens).toEqual([new Token(TokenType.Decimal, "30.14")]);
+});
+
+test("it lexes string", () => {
+    const tokens = new Lexer(`"test"`).lex();
+    expect(tokens).toEqual([new Token(TokenType.String, `"test"`)]);
 });
 
 test("it lexes whitespace", () => {

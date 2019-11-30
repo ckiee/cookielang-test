@@ -2,8 +2,9 @@ enum TokenType {
     Comment = "comment",
     KeywordFn = "keywordFn",
     KeywordMut = "keywordMut",
-    Float = "float",
+    Decimal = "decimal",
     Int = "int",
+    String = "string",
     Identifier = "identifier",
     SymbolComma = "symbolComma",
     SymbolColon = "symbolColon",
@@ -11,6 +12,9 @@ enum TokenType {
     SymbolCloseParen = "symbolCloseParen",
     SymbolOpenBrace = "symbolOpenBrace",
     SymbolCloseBrace = "symbolCloseBrace",
+    SymbolEqual = "symbolEqual",
+    SymbolDubQuote = "symbolDubQuote",
+
     Whitespace = "whitespace"
 }
 export const regexps = {
@@ -18,8 +22,9 @@ export const regexps = {
 
     keywordFn: /^fn/,
     keywordMut: /^mut/,
-    float: /^\d+\.\d+/,
+    decimal: /^\d+\.\d+/,
     int: /^\d+/,
+    string: /^".+"/,
     identifier: /^\w+/,
     symbolOpenParen: /^\(/,
     symbolCloseParen: /^\)/,
@@ -27,6 +32,8 @@ export const regexps = {
     symbolCloseBrace: /^\{/,
     symbolComma: /^,/,
     symbolColon: /^:/,
+    symbolEqual: /^=/,
+    symbolDubQuote: /^"/,
 
     whitespace: /^\s+/
 } as RegexpMap;

@@ -1,6 +1,7 @@
 export enum NodeType {
-    FLOAT = "float", // TODO
+    DECIMAL = "decimal", // TODO
     INT = "int",
+    STRING = "string",
     ARG = "arg",
     TYPE = "type",
     PROTOTYPE = "prototype",

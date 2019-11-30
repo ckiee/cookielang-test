@@ -54,5 +54,6 @@ test("it parses prototype", () => {
     );
 });
 
+test.todo("it parses string")
 test.todo("it parses block")
 test.todo("it parses function")

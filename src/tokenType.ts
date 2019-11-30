@@ -29,7 +29,7 @@ export const regexps = {
     symbolOpenParen: /^\(/,
     symbolCloseParen: /^\)/,
     symbolOpenBrace: /^\{/,
-    symbolCloseBrace: /^\{/,
+    symbolCloseBrace: /^\}/,
     symbolComma: /^,/,
     symbolColon: /^:/,
     symbolEqual: /^=/,

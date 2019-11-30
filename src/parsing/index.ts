@@ -20,10 +20,12 @@ export default class Parser {
     parseTopLevel(): Node {
         switch (this.ts.get().type) {
             case TokenType.KeywordFn:
-                return this.parseFunction()
-            
-                
-            default: throw new Error("Token is of an unexpected type for the top level")
+                return this.parseFunction();
+
+            default:
+                throw new Error(
+                    "Token is of an unexpected type for the top level"
+                );
         }
     }
 
@@ -39,23 +41,25 @@ export default class Parser {
                 this.ts.next().expectType(TokenType.Identifier).match
             );
         } else {
-            return new Type(
-                false,
-                this.ts.get().expectType(TokenType.Identifier).match
-            );
+            const tv = this.ts.get().expectType(TokenType.Identifier).match;
+            this.ts.skip();
+            return new Type(false, tv);
         }
     }
     parseArg(): Arg {
         // world: mut string
         const id = this.ts.get().expectType(TokenType.Identifier);
+        this.ts.skip();
         this.ts.skipOver(TokenType.SymbolColon);
         return [id.match, this.parseType()];
     }
     parsePrototype(): Prototype {
         // hello (world: mut string) string
         const name = this.ts.get().expectType(TokenType.Identifier);
+        this.ts.skip();
         this.ts.skipOver(TokenType.SymbolOpenParen);
         const args = [this.parseArg()];
+        this.ts.skip();
         this.ts.skipOver(TokenType.SymbolCloseParen);
         const returnType = this.parseType();
         return new Prototype(name.match, args, returnType);
@@ -72,19 +76,21 @@ export default class Parser {
         return new Function(this.parsePrototype(), this.parseBlock());
     }
     parseString(): String {
-        this.ts.skipOver(TokenType.SymbolDubQuote);
         const tok = this.ts.get().expectType(TokenType.String);
-        this.ts.skipOver(TokenType.SymbolDubQuote);
-        return new String(tok.match)
+        return new String(tok.match.slice(0, -1));
     }
     parseVarDeclareStatement(): VarDeclareStatement {
         // foobar: int = 123
-        const id = this.ts.get().expectType(TokenType.Identifier)
+        const id = this.ts.get().expectType(TokenType.Identifier);
         this.ts.skipOver(TokenType.SymbolColon);
         const type = this.parseType();
         this.ts.skipOver(TokenType.SymbolEqual);
         // TODO: not ignore value
         this.ts.skip();
-        return new VarDeclareStatement(id.match, type, new Int(BitSize.B16, false, 1337))
+        return new VarDeclareStatement(
+            id.match,
+            type,
+            new Int(BitSize.B16, false, 1337)
+        );
     }
 }

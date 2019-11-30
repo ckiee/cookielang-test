@@ -14,7 +14,7 @@
     },
     "scripts": {
         "start": "ts-node src",
-        "lexer-repl": "ts-node src/lexerRepl",
+        "repl": "ts-node src/repl",
         "test": "jest"
     }
 }

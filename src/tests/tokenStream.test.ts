@@ -15,7 +15,7 @@ test("it skips over tokens", () => {
     ts.skipOver(TokenType.Identifier)
     expect(ts.get()).toEqual({
         type: TokenType.Identifier,
-        match: "foo"
+        match: "world"
     });
 });
 

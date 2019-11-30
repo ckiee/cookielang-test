@@ -6,6 +6,9 @@ import Type from "../parsing/type";
 import Int from "../parsing/int";
 import BitSize from "../bitsize";
 import Prototype from "../parsing/prototype";
+import String from "../parsing/string";
+import Function from "../parsing/function";
+import Block from "../parsing/block";
 
 test("it parses int", () => {
     const ts = new TokenStream([new Token(TokenType.Int, "100")]);
@@ -53,7 +56,36 @@ test("it parses prototype", () => {
         )
     );
 });
+test("it parses string", () => {
+    const ts = new TokenStream([new Token(TokenType.String, `hello"`)]);
+    const parser = new Parser(ts);
+    expect(parser.parseString()).toEqual(new String("hello"));
+});
+test("it parses function", () => {
+    const ts = new TokenStream([
+        new Token(TokenType.KeywordFn, "fn"),
+        new Token(TokenType.Identifier, "main"),
+        new Token(TokenType.SymbolOpenParen, "("),
+        new Token(TokenType.Identifier, "world"),
+        new Token(TokenType.SymbolColon, ":"),
+        new Token(TokenType.KeywordMut, "mut"),
+        new Token(TokenType.Identifier, "string"),
+        new Token(TokenType.SymbolCloseParen, ")"),
+        new Token(TokenType.Identifier, "string"),
+        new Token(TokenType.SymbolOpenBrace, "{"),
+        new Token(TokenType.SymbolCloseBrace, "}")
+    ]);
+    const parser = new Parser(ts);
+    expect(parser.parseFunction()).toEqual(
+        new Function(
+            new Prototype(
+                "main",
+                [["world", new Type(true, "string")]],
+                new Type(false, "string")
+            ),
+            new Block([])
+        )
+    );
+});
 
-test.todo("it parses string")
-test.todo("it parses block")
-test.todo("it parses function")
+test.todo("it parses block");

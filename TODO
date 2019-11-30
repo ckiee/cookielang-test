@@ -1,3 +1,5 @@
-☐ refactor Parser#parseType
-☐ refactor tokenstream @started(19-11-30 10:05)
+✔ refactor Parser#parseType @started(19-11-30 10:14) @done(19-11-30 10:19) @lasted(5m59s)
+✔ refactor tokenstream @started(19-11-30 10:05) @done(19-11-30 10:19) @lasted(14m58s)
 ✔ refactor lexer TokenType @done(19-11-30 10:04)
+☐ write tests for parser
+☐ cleanup tokenstream and lexer tests

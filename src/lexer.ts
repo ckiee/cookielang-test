@@ -1,8 +1,16 @@
 import TokenType, { getTokenTypeRegexp } from "./tokenType";
 
-export interface Token {
-    type: string;
+export class Token {
+    type: TokenType;
     match: string;
+    constructor(type: TokenType, match: string) {
+        this.type = type;
+        this.match = match;
+    }
+    expectType(tt: TokenType): Token {
+        if (tt == this.type) return this;
+        else throw new Error(`expected token ${tt} but got ${this.type}`);
+    }
 }
 
 export default class Lexer {
@@ -35,7 +43,7 @@ export default class Lexer {
                 const match = result[0];
                 this.i += match.length - 1;
                 if (k !== "whitespace" || !this.ignoreWhitespace) {
-                    this.tokens.push({ type: k, match });
+                    this.tokens.push(new Token(k, match));
                 }
                 lexed = true;
                 break;

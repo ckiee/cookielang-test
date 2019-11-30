@@ -1,4 +1,5 @@
 import { Token } from "./lexer";
+import TokenType from "./tokenType";
 
 export default class TokenStream {
     data: Token[];
@@ -16,14 +17,8 @@ export default class TokenStream {
     skip(l = 1) {
         this.i += l;
     }
-    skipOver(type: string) {
-        if (this.peek().type == type) this.skip();
-        else
-            throw new Error(
-                `expected token to be of type "${type}" but got "${
-                    this.peek().type
-                }"`
-            );
+    skipOver(type: TokenType) {
+        if (this.peek().expectType(type)) this.skip();
     }
     get() {
         return this.data[this.i];

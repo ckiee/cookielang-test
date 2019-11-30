@@ -1,22 +1,24 @@
 import TokenStream from "../tokenStream";
+import TokenType from "../tokenType";
+import { Token } from "../lexer";
 let ts: TokenStream;
 
 beforeEach(() => {
     ts = new TokenStream([
-        { type: "identifier", match: "hello" },
-        { type: "identifier", match: "world" }
+        new Token(TokenType.Identifier, "hello"),
+        new Token(TokenType.Identifier, "world")
     ]);
 });
 
 test("it skips over tokens", () => {
-    ts.skipOver("identifier");
+    ts.skipOver(TokenType.Identifier);
     expect(ts.get()).toEqual({ type: "identifier", match: "world" });
 });
 
 test("it fails skipping over the wrong type of token", () => {
     expect(() => {
-        ts.skipOver("whitespace");
-    }).toThrow(/expected token to be of type .+/);
+        ts.skipOver(TokenType.Whitespace);
+    }).toThrow(/expected token whitespace.+/);
 });
 
 test("it peeks", () => {

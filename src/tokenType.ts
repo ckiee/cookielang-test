@@ -22,7 +22,7 @@ export const regexps = {
     int: /^\d+/,
     identifier: /^\w+/,
     symbolOpenParen: /^\(/,
-    symbolCloseParen: /^\(/,
+    symbolCloseParen: /^\)/,
     symbolOpenBrace: /^\{/,
     symbolCloseBrace: /^\{/,
     symbolComma: /^,/,

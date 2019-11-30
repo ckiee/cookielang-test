@@ -1,8 +1,8 @@
 export enum NodeType {
     FLOAT = "float", // TODO
     INT = "int",
-    TYPE = "type",
     ARG = "arg",
+    TYPE = "type",
     PROTOTYPE = "prototype",
     STATEMENT = "statement",
     BLOCK = "block",

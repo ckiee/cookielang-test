@@ -1,2 +1,3 @@
 ☐ refactor Parser#parseType
-☐ refactor lexer TokenType
+☐ refactor tokenstream @started(19-11-30 10:05)
+✔ refactor lexer TokenType @done(19-11-30 10:04)

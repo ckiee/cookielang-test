@@ -18,7 +18,8 @@ export default class TokenStream {
         this.i += l;
     }
     skipOver(type: TokenType) {
-        if (this.peek().expectType(type)) this.skip();
+        this.peek().expectType(type);
+        this.skip(2);
     }
     get() {
         return this.data[this.i];

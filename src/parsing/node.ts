@@ -1,12 +1,12 @@
 export enum NodeType {
-    FLOAT, // TODO
-    INT,
-    TYPE,
-    ARG,
-    PROTOTYPE,
-    STATEMENT,
-    BLOCK, 
-    FUNCTION // TODO
+    FLOAT = "float", // TODO
+    INT = "int",
+    TYPE = "type",
+    ARG = "arg",
+    PROTOTYPE = "prototype",
+    STATEMENT = "statement",
+    BLOCK = "block",
+    FUNCTION = "function"
 }
 
 export default abstract class Node {

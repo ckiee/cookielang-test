@@ -6,13 +6,17 @@ let ts: TokenStream;
 beforeEach(() => {
     ts = new TokenStream([
         new Token(TokenType.Identifier, "hello"),
-        new Token(TokenType.Identifier, "world")
+        new Token(TokenType.Identifier, "world"),
+        new Token(TokenType.Identifier, "foo")
     ]);
 });
 
 test("it skips over tokens", () => {
-    ts.skipOver(TokenType.Identifier);
-    expect(ts.get()).toEqual({ type: "identifier", match: "world" });
+    ts.skipOver(TokenType.Identifier)
+    expect(ts.get()).toEqual({
+        type: TokenType.Identifier,
+        match: "foo"
+    });
 });
 
 test("it fails skipping over the wrong type of token", () => {
@@ -22,23 +26,23 @@ test("it fails skipping over the wrong type of token", () => {
 });
 
 test("it peeks", () => {
-    expect(ts.peek()).toEqual({ type: "identifier", match: "world" });
+    expect(ts.peek()).toEqual({ type: TokenType.Identifier, match: "world" });
 });
 
 test("it goes to the next token", () => {
-    expect(ts.next()).toEqual({ type: "identifier", match: "world" });
+    expect(ts.next()).toEqual({ type: TokenType.Identifier, match: "world" });
 });
 
 test("it gets the current token", () => {
-    expect(ts.get()).toEqual({ type: "identifier", match: "hello" });
+    expect(ts.get()).toEqual({ type: TokenType.Identifier, match: "hello" });
 });
 
 test("it goes to the end of the tokenstream", () => {
-    ts.next();
+    ts.skip(2)
     expect(ts.next()).toEqual(undefined);
 });
 
 test("it knows about the end", () => {
-    ts.next();
+    ts.skip(2)
     expect(ts.hasNext()).toEqual(false);
 });

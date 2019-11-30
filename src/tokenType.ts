@@ -5,6 +5,8 @@ enum TokenType {
     Float = "float",
     Int = "int",
     Identifier = "identifier",
+    SymbolComma = "symbolComma",
+    SymbolColon = "symbolColon",
     SymbolOpenParen = "symbolOpenParen",
     SymbolCloseParen = "symbolCloseParen",
     SymbolOpenBrace = "symbolOpenBrace",
@@ -23,6 +25,8 @@ export const regexps = {
     symbolCloseParen: /^\(/,
     symbolOpenBrace: /^\{/,
     symbolCloseBrace: /^\{/,
+    symbolComma: /^,/,
+    symbolColon: /^:/,
 
     whitespace: /^\s+/
 } as RegexpMap;

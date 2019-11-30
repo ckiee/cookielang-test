@@ -2,4 +2,4 @@
 ✔ refactor tokenstream @started(19-11-30 10:05) @done(19-11-30 10:19) @lasted(14m58s)
 ✔ refactor lexer TokenType @done(19-11-30 10:04)
 ✔ write tests for parser @started(19-11-30 10:20) @done(19-11-30 11:11) @lasted(51m51s)
-☐ cleanup tokenstream and lexer tests
+☐ cleanup tokenstream and lexer tests @started(19-11-30 12:57)

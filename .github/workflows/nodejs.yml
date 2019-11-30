@@ -1,23 +1,14 @@
-name: Node CI
-
+name: CI
 on: [push]
-
 jobs:
-    build:
-        runs-on: ubuntu-latest
-
-        steps:
-            - uses: actions/checkout@v1
-            - name: Use Node.js 12.x
-            - uses: actions/setup-node@v1
-				with:
-					node-version: 12.x
-			- uses: sergioramos/yarn-actions/install@master
-				with:
-					frozen-lockfile: true
-            - name: npm install, and test
-				run: |
-					yarn i
-					yarn test --coverage
-				env:
-					CI: true
+  build:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: test --coverage

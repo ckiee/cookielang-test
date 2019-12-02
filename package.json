@@ -9,8 +9,8 @@
         "@types/node": "^12.7.12",
         "jest": "^24.9.0",
         "ts-jest": "^24.2.0",
-        "ts-node": "^8.4.1",
-        "typescript": "^3.6.3"
+        "typescript": "^3.6.3",
+        "ts-node": "^8.5.4"
     },
     "scripts": {
         "start": "ts-node src",

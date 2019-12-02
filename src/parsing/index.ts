@@ -60,6 +60,7 @@ export default class Parser {
         const name = this.ts.get().expectType(TokenType.Identifier);
         this.ts.skip();
         this.ts.skipOver(TokenType.SymbolOpenParen);
+        // TODO: Use while loop to parse optional arg(s).
         const args = [this.parseArg()];
         this.ts.skip();
         this.ts.skipOver(TokenType.SymbolCloseParen);

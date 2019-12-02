@@ -46,6 +46,8 @@ export default class CCodeGenPass extends Pass {
         return node;
     }
     visitFunction(node: Function): Node {
+        this.valueStack.push(
+        );
         return node;
     }
     visitVarDeclareStmt(node: VarDeclareStatement): Node {

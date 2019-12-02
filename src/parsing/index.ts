@@ -1,5 +1,5 @@
 import TokenStream from "../util/tokenStream";
-import Int from "./int";
+import Int from "./values/int";
 import BitSize from "../util/bitsize";
 import Type from "./type";
 import TokenType from "../lexing/tokenType";
@@ -9,8 +9,9 @@ import Block from "./block";
 import Function from "./function";
 import VarDeclareStatement from "./statements/vardeclare";
 import Node from "./node";
-import String from "./string";
+import String from "./values/string";
 import Statement from "./statement";
+import Value from "./value";
 
 export default class Parser {
     ts: TokenStream;
@@ -32,7 +33,7 @@ export default class Parser {
 
     parseInt(): Int {
         // 1337
-        return new Int(BitSize.B64, false, parseInt(this.ts.get().match));
+        return new Int(parseInt(this.ts.get().match));
     }
     parseType(): Type {
         // mut string OR string
@@ -73,7 +74,7 @@ export default class Parser {
             statements.push(this.parseStatement())
         }
         this.ts.skipOver(TokenType.SymbolCloseBrace);
-        return new Block([]);
+        return new Block(statements);
     }
     parseFunction(): Function {
         // fn <PROTO> <BLOCk>
@@ -95,17 +96,25 @@ export default class Parser {
         }
     }
     parseVarDeclareStatement(): VarDeclareStatement {
-        // foobar: int = 123
-        const id = this.ts.get().expectType(TokenType.Identifier);
-        this.ts.skipOver(TokenType.SymbolColon);
+        // int foobar = 123
         const type = this.parseType();
+        const id = this.ts.get().expectType(TokenType.Identifier);
+        this.ts.next();
         this.ts.skipOver(TokenType.SymbolEqual);
         // TODO: not ignore value
         this.ts.skip();
         return new VarDeclareStatement(
             id.match,
             type,
-            new Int(BitSize.B16, false, 1337)
+            new Int(1337)
         );
+    }
+    parseValue(): Value {
+        switch (this.ts.get().type) {
+            case TokenType.Int:
+                // return new Int()
+            default:
+                throw new Error("unknown value type")
+        }
     }
 }

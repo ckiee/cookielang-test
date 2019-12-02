@@ -1,5 +1,5 @@
-import Int from "../parsing/int";
-import String from "../parsing/string";
+import Int from "../parsing/values/int";
+import String from "../parsing/values/string";
 import Node from "../parsing/node";
 import Type from "../parsing/type";
 import Prototype from "../parsing/prototype";

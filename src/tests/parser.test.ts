@@ -3,17 +3,18 @@ import TokenType from "../lexing/tokenType";
 import Parser from "../parsing";
 import { Token } from "../lexing/lexer";
 import Type from "../parsing/type";
-import Int from "../parsing/int";
+import Int from "../parsing/values/int";
 import BitSize from "../util/bitsize";
 import Prototype from "../parsing/prototype";
-import String from "../parsing/string";
+import String from "../parsing/values/string";
 import Function from "../parsing/function";
 import Block from "../parsing/block";
+import VarDeclareStatement from "../parsing/statements/vardeclare";
 
 test("it parses int", () => {
     const ts = new TokenStream([new Token(TokenType.Int, "100")]);
     const parser = new Parser(ts);
-    expect(parser.parseInt()).toEqual(new Int(BitSize.B64, false, 100));
+    expect(parser.parseInt()).toEqual(new Int(100));
 });
 
 test("it parses arg", () => {
@@ -88,4 +89,23 @@ test("it parses function", () => {
     );
 });
 
-test.todo("it parses block");
+test("it parses block", () => {
+    const ts = new TokenStream([
+        new Token(TokenType.SymbolOpenBrace, "{"),
+        new Token(TokenType.Identifier, "int"),
+        new Token(TokenType.Identifier, "hi"),
+        new Token(TokenType.SymbolEqual, "="),
+        new Token(TokenType.Int, "123"),
+        new Token(TokenType.SymbolCloseBrace, "}")
+    ]);
+    const parser = new Parser(ts);
+    expect(parser.parseBlock()).toEqual(
+        new Block([
+            new VarDeclareStatement(
+                "hi",
+                new Type(false, "hi"),
+                new Int(123)
+            )
+        ])
+    );
+});

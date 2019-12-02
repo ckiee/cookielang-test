@@ -4,7 +4,7 @@ import String from "../parsing/values/string";
 import Node from "../parsing/node";
 import Type from "../parsing/type";
 import Prototype from "../parsing/prototype";
-import Statement, { StatementType } from "../parsing/statement";
+import Statement, {StatementType} from "../parsing/statement";
 import Block from "../parsing/block";
 import Function from "../parsing/function";
 import CNode from "../ccodegen/cnode";
@@ -43,14 +43,38 @@ export default class CCodeGenPass extends Pass {
         }
     }
     visitBlock(node: Block): Node {
+        const statements = [];
+
+        // Visit the block's statements.
+        for (const statement of node.statements) {
+            this.visitStatement(statement);
+            statements.push(this.valueStack.pop()!);
+        }
+
+        this.valueStack.push(
+            CNode.block(statements).toString()
+        );
+
         return node;
     }
     visitFunction(node: Function): Node {
+        this.visitPrototype(node.proto);
+        const proto = this.valueStack.pop()!;
+        this.visitBlock(node.block);
+        const body = this.valueStack.pop()!;
+
         this.valueStack.push(
+            CNode.fn(proto, body).toString()
         );
+
         return node;
     }
     visitVarDeclareStmt(node: VarDeclareStatement): Node {
+        // TODO: Need to visit node's props.
+        this.valueStack.push(
+            // TODO: hard-coded value
+            CNode.varDeclare(node.vType.value, node.id, "1337"/*node.value*/).toString()
+        );
         return node;
     }
 }

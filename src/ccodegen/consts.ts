@@ -41,9 +41,10 @@ enum CSymbol {
     Sharp = "#",
     Equal = "=",
     Bang = "!",
-    DubQuote = `"`
+    DubQuote = "\"",
+    SemiColon = ";"
 }
 type CEntity = CSymbol | CKeyword | string
 type CType = CKeyword | string
 
-export { CKeyword, CSymbol, CType, CEntity };
+export {CKeyword, CSymbol, CType, CEntity};

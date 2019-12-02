@@ -89,30 +89,36 @@ export default class Parser {
         switch (this.ts.get().type) {
             case TokenType.Identifier:
                 if (this.ts.peek().type == TokenType.Identifier) {
-                    return this.parseVarDeclareStatement(); 
+                    return this.parseVarDeclareStatement();
                 }
             default:
                 throw new Error("unknown statement type")
         }
     }
     parseVarDeclareStatement(): VarDeclareStatement {
-        // int foobar = 123
+        // int foobar [= 123]
         const type = this.parseType();
         const id = this.ts.get().expectType(TokenType.Identifier);
         this.ts.next();
+        // TODO: Assigning value should be optional.
         this.ts.skipOver(TokenType.SymbolEqual);
-        // TODO: not ignore value
+        const value = this.parseValue();
         this.ts.skip();
         return new VarDeclareStatement(
             id.match,
             type,
-            new Int(1337)
+            value
         );
     }
     parseValue(): Value {
         switch (this.ts.get().type) {
             case TokenType.Int:
-                // return new Int()
+                return this.parseInt();
+            case TokenType.String:
+                return this.parseString();
+
+            // TODO: Missing decimal case.
+
             default:
                 throw new Error("unknown value type")
         }

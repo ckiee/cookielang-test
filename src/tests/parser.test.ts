@@ -1,10 +1,9 @@
 import TokenStream from "../util/tokenStream";
 import TokenType from "../lexing/tokenType";
 import Parser from "../parsing";
-import { Token } from "../lexing/lexer";
+import {Token} from "../lexing/lexer";
 import Type from "../parsing/type";
 import Int from "../parsing/values/int";
-import BitSize from "../util/bitsize";
 import Prototype from "../parsing/prototype";
 import String from "../parsing/values/string";
 import Function from "../parsing/function";
@@ -103,7 +102,7 @@ test("it parses block", () => {
         new Block([
             new VarDeclareStatement(
                 "hi",
-                new Type(false, "hi"),
+                new Type(false, "int"),
                 new Int(123)
             )
         ])

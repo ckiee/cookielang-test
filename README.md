@@ -54,8 +54,8 @@ if foo == bar {
     - `uint32`
     - `uint64`
     - `int16`
-    - `int32`
-    - `int64` (this one is also `int`)
+    - `int32` (this one is also `int`)
+    - `int64` 
 - `bool`
 - `float` (always 64 bit)
 - `str`
@@ -78,7 +78,7 @@ console.println(bar) // foobar
 tens = [1, 10, 100]
 console.println(tens) // [1, 10, 100]
 // Arrays are 0-indexed:
-console.println(tens[1]) // 100
+console.println(tens[1]) // 10
 
 mut cool_langs = ["V", "Go", "Rust"]
 cool_langs.push("Cookielang")

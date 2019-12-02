@@ -61,8 +61,26 @@ if foo == bar {
 - `str`
 - `map[str]str`
 ### Strings
-TODO Write this
+```rust
+foo = "bar ball"
+console.println(foo) // bar
+console.println(foo.length) // 3
+
+console.println(foo[4..8]) // ball
+console.println(foo[4..]) // ball
+mut bar = "foo"
+bar += "bar"
+console.println(bar) // foobar
+```
 
 ### Arrays
+```rust
+tens = [1, 10, 100]
+console.println(tens) // [1, 10, 100]
+// Arrays are 0-indexed:
+console.println(tens[1]) // 100
 
+mut cool_langs = ["V", "Go", "Rust"]
+cool_langs.push("Cookielang")
+```
 ### Maps

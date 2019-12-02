@@ -8,7 +8,6 @@ import Statement, {StatementType} from "../parsing/statement";
 import Block from "../parsing/block";
 import Function from "../parsing/function";
 import CNode from "../ccodegen/cnode";
-import CBuilder from "../ccodegen/builder";
 import VarDeclareStatement from "../parsing/statements/vardeclare";
 
 export default class CCodeGenPass extends Pass {

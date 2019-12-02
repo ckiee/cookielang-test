@@ -1,12 +1,12 @@
 import { CEntity } from "./consts";
 
 export default class CBuilder {
-    nodes: CEntity[] = [];
-    add(n: CEntity) {
-        this.nodes.push(n);
+    str: string = "";
+    add(n: CEntity, space: boolean = true) {
+        this.str += space ? n + " " : n
         return this;
     }
     toString() {
-        return this.nodes.join(" ");
+        return this.str.trimRight()
     }
 }

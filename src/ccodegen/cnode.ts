@@ -9,5 +9,8 @@ export default abstract class CNode {
             .add(CSymbol.ParenL)
             .add(CSymbol.ParenR);
     }
+    static string(value: string) {
+        return new CBuilder().add(CSymbol.DubQuote, false).add(value, false).add(CSymbol.DubQuote)
+    }
     // TODO: Add args and stuff
 }

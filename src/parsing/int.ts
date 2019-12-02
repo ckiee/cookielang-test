@@ -1,5 +1,6 @@
 import Node, { NodeType } from "./node";
 import BitSize from "../util/bitsize";
+import Pass from "../passes";
 
 export default class Int extends Node {
     readonly size: BitSize;
@@ -10,5 +11,8 @@ export default class Int extends Node {
         this.size = size;
         this.signed = signed;
         this.value = value;
+    }
+    accept(pass: Pass): Node {
+        return pass.visitInt(this);
     }
 }

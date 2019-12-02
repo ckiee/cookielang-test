@@ -1,4 +1,5 @@
 import Node, { NodeType } from "./node";
+import Pass from "../passes";
 
 export default class Type extends Node {
     readonly mut: boolean
@@ -7,5 +8,8 @@ export default class Type extends Node {
         super(NodeType.TYPE);
         this.value = value; 
         this.mut = mut;
+    }
+    accept(pass: Pass): Node {
+        return pass.visitType(this);
     }
 }

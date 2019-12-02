@@ -1,3 +1,5 @@
+import Pass from "../passes";
+
 export enum NodeType {
     DECIMAL = "decimal", // TODO
     INT = "int",
@@ -15,4 +17,5 @@ export default abstract class Node {
     constructor(type: NodeType) {
         this.type = type;
     }
+    abstract accept(pass: Pass): Node
 }

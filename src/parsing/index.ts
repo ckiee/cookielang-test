@@ -7,9 +7,10 @@ import Arg from "./arg";
 import Prototype from "./prototype";
 import Block from "./block";
 import Function from "./function";
-import VarDeclareStatement from "./vardeclare";
+import VarDeclareStatement from "./statements/vardeclare";
 import Node from "./node";
 import String from "./string";
+import Statement from "./statement";
 
 export default class Parser {
     ts: TokenStream;
@@ -67,6 +68,10 @@ export default class Parser {
     parseBlock(): Block {
         // { (statements) }
         this.ts.skipOver(TokenType.SymbolOpenBrace);
+        const statements: Statement[] = [];
+        while (this.ts.get().type !== TokenType.SymbolCloseBrace) {
+            statements.push(this.parseStatement())
+        }
         this.ts.skipOver(TokenType.SymbolCloseBrace);
         return new Block([]);
     }
@@ -78,6 +83,16 @@ export default class Parser {
     parseString(): String {
         const tok = this.ts.get().expectType(TokenType.String);
         return new String(tok.match.slice(0, -1));
+    }
+    parseStatement(): Statement {
+        switch (this.ts.get().type) {
+            case TokenType.Identifier:
+                if (this.ts.peek().type == TokenType.Identifier) {
+                    return this.parseVarDeclareStatement(); 
+                }
+            default:
+                throw new Error("unknown statement type")
+        }
     }
     parseVarDeclareStatement(): VarDeclareStatement {
         // foobar: int = 123

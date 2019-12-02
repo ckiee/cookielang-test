@@ -40,7 +40,8 @@ enum CSymbol {
     ParenR = ")",
     Sharp = "#",
     Equal = "=",
-    Bang = "!"
+    Bang = "!",
+    DubQuote = `"`
 }
 type CEntity = CSymbol | CKeyword | string
 type CType = CKeyword | string

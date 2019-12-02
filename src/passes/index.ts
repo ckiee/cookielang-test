@@ -6,6 +6,7 @@ import Prototype from "../parsing/prototype";
 import Statement from "../parsing/statement";
 import Block from "../parsing/block";
 import Function from "../parsing/function";
+import VarDeclareStatement from "../parsing/statements/vardeclare";
 
 // export enum NodeType {
 //     DECIMAL = "decimal", // TODO
@@ -40,6 +41,9 @@ export default abstract class Pass {
         return node;
     }
     visitFunction(node: Function): Node {
+        return node;
+    }
+    visitVarDeclareStmt(node: VarDeclareStatement): Node {
         return node;
     }
 }

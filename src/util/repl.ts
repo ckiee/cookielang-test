@@ -2,7 +2,9 @@ import readline from "readline";
 import Lexer from "../lexing/lexer";
 import Parser from "../parsing";
 import TokenStream from "./tokenStream";
-import Node from "../parsing/node";
+import Node, {NodeType} from "../parsing/node";
+import CCodeGenPass from "../passes/ccodegenpass";
+import Function from "../parsing/function";
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -21,8 +23,10 @@ function capitalizeFirstLetter(string: string) {
 }
 const ignoreWhitespace =
     process.argv.includes("--ignore-whitespace") || process.argv.includes("-i");
-const shouldParse =
+let shouldParse =
     process.argv.includes("--parse") || process.argv.includes("-p");
+const shouldCCodeGen =
+    process.argv.includes("--codegen") || process.argv.includes("-c");
 async function repl() {
     while (true) {
         const answer = await question("> ");
@@ -41,12 +45,33 @@ async function repl() {
             console.log(out);
         }
 
+        const nodes: Node[] = [];
+
+        // Parse must be true if code generating.
+        if (shouldCCodeGen) {
+            shouldParse = true;
+        }
+
         if (shouldParse) {
             const parser = new Parser(new TokenStream(out));
-            const nodes = [] as Node[];
             while (parser.ts.hasNext()) {
                 nodes.push(parser.parseTopLevel())
                 console.log(nodes[nodes.length - 1]);
+            }
+        }
+
+        if (shouldCCodeGen) {
+            const ccodegenPass = new CCodeGenPass();
+
+            if (nodes.length == 0 || nodes[0].type !== NodeType.FUNCTION) {
+                throw new Error("No functions were parsed -- cannot codegen");
+            }
+
+            for (const fun of nodes) {
+                const func = <Function>fun;
+                ccodegenPass.visitFunction(func);
+                console.log(`--- output of function '${func.proto.name}' ---`);
+                console.log(ccodegenPass.valueStack.pop());
             }
         }
     }

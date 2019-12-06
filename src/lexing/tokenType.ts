@@ -2,6 +2,8 @@ enum TokenType {
     Comment = "comment",
     KeywordFn = "keywordFn",
     KeywordMut = "keywordMut",
+    KeywordImport = "keywordImport",
+
     Decimal = "decimal",
     Int = "int",
     String = "string",
@@ -22,6 +24,7 @@ export const regexps = {
 
     keywordFn: /^fn/,
     keywordMut: /^mut/,
+    keywordImport: /^import/,
     decimal: /^\d+\.\d+/,
     int: /^\d+/,
     string: /^".+"/,

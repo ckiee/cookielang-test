@@ -13,6 +13,7 @@ import String from "./values/string";
 import Statement from "./statement";
 import Value from "./value";
 import FunctionCallStatement from "./statements/fncall";
+import Import from "./import";
 
 export default class Parser {
     ts: TokenStream;
@@ -24,7 +25,8 @@ export default class Parser {
         switch (this.ts.get().type) {
             case TokenType.KeywordFn:
                 return this.parseFunction();
-
+            case TokenType.KeywordImport:
+                return this.parseImport();
             default:
                 throw new Error(
                     "Token is of an unexpected type for the top level"
@@ -139,5 +141,11 @@ export default class Parser {
             default:
                 throw new Error("unknown value type " + this.ts.get().type);
         }
+    }
+    parseImport(): Import {
+        // import "stdio.h"
+        this.ts.skipOver(TokenType.KeywordImport);
+        const file = this.parseString();
+        return new Import(file);
     }
 }

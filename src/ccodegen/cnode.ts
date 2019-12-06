@@ -1,4 +1,4 @@
-import { CType, CSymbol } from "./consts";
+import { CType, CSymbol, CKeyword } from "./consts";
 import CBuilder from "./builder";
 import Arg from "../parsing/arg";
 import Type from "../parsing/type";
@@ -76,5 +76,11 @@ export default abstract class CNode {
         }
         builder.add(CSymbol.ParenR).add(CSymbol.SemiColon);
         return builder.toString();
+    }
+    static import(file: String) {
+        return new CBuilder()
+            .add(CKeyword.PreprocessInclude)
+            .add(this.string(file))
+            .toString();
     }
 }

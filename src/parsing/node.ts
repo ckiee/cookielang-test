@@ -9,7 +9,8 @@ export enum NodeType {
     PROTOTYPE = "prototype",
     STATEMENT = "statement",
     BLOCK = "block",
-    FUNCTION = "function"
+    FUNCTION = "function",
+    IMPORT = "import"
 }
 
 export default abstract class Node {

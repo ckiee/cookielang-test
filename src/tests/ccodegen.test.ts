@@ -11,3 +11,4 @@ test("it emits C proto", () => {
 test.todo("it emits fn")
 test.todo("it emits var declare")
 test.todo("it emits fn call")
+test.todo("it emits import");

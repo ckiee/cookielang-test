@@ -29,7 +29,7 @@ const shouldCCodeGen =
     process.argv.includes("--codegen") || process.argv.includes("-c");
 async function repl() {
     while (true) {
-        const answer = await question("> ");
+        const answer = (await question("> ")).split("\\n").join("\n");
         const out = new Lexer(answer, ignoreWhitespace).lex();
         if (process.argv.includes("-ts")) {
             // TokenStream mode

@@ -1,7 +1,7 @@
 import Pass from ".";
 import Int from "../parsing/values/int";
 import String from "../parsing/values/string";
-import Node from "../parsing/node";
+import Node, { NodeType } from "../parsing/node";
 import Type from "../parsing/type";
 import Prototype from "../parsing/prototype";
 import Statement, { StatementType } from "../parsing/statement";
@@ -10,6 +10,7 @@ import Function from "../parsing/function";
 import CNode from "../ccodegen/cnode";
 import VarDeclareStatement from "../parsing/statements/vardeclare";
 import FunctionCallStatement from "../parsing/statements/fncall";
+import Import from "../parsing/import";
 
 export default class CCodeGenPass extends Pass {
     valueStack: string[] = [];
@@ -82,5 +83,19 @@ export default class CCodeGenPass extends Pass {
     visitFnCallStmt(node: FunctionCallStatement): Node {
         this.valueStack.push(CNode.fnCall(node.id, node.args));
         return node;
+    }
+    visitImport(node: Import): Node {
+        this.valueStack.push(CNode.import(node.file));
+        return node;
+    }
+    visitTopLevel(node: Node): Node {
+        switch (node.type) {
+            case NodeType.FUNCTION:
+                return this.visitFunction(<Function> node);
+            case NodeType.IMPORT:
+                return this.visitImport(<Import> node)
+            default:
+                throw new Error("unknown top level nodetype")
+        }
     }
 }

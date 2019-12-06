@@ -30,7 +30,9 @@ enum CKeyword {
     Unsigned = "unsigned",
     Void = "void",
     Volatile = "volatile",
-    While = "while"
+    While = "while",
+
+    PreprocessInclude = "#include"
 }
 
 enum CSymbol {

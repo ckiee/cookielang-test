@@ -126,3 +126,5 @@ test("it parses fn call", () => {
         new FunctionCallStatement("bag", [new Int(1337), new String("foo")])
     );
 });
+
+test.todo("it parses import");

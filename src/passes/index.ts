@@ -8,6 +8,7 @@ import Block from "../parsing/block";
 import Function from "../parsing/function";
 import VarDeclareStatement from "../parsing/statements/vardeclare";
 import FunctionCallStatement from "../parsing/statements/fncall";
+import Import from "../parsing/import";
 
 // export enum NodeType {
 //     DECIMAL = "decimal", // TODO
@@ -48,6 +49,12 @@ export default abstract class Pass {
         return node;
     }
     visitFnCallStmt(node: FunctionCallStatement): Node {
+        return node;
+    }
+    visitImport(node: Import): Node {
+        return node;
+    }
+    visitTopLevel(node: Node): Node {
         return node;
     }
 }

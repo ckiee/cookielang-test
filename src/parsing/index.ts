@@ -101,7 +101,6 @@ export default class Parser {
         const type = this.parseType();
         const id = this.ts.get().expectType(TokenType.Identifier);
         this.ts.next();
-        // TODO: Assigning value should be optional.
         this.ts.skipOver(TokenType.SymbolEqual);
         const value = this.parseValue();
         this.ts.skip();

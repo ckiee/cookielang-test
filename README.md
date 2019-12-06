@@ -24,7 +24,11 @@ console.println("Hello Cookielang!") // Syntax Error
 ```
 ```rust
 fn main() {
-    console.println("Hello Cookielang!") // Hello Cookielang!
+    hello("Cookielang")
+}
+
+fn hello(lang string) {
+    console.println("Hello " + lang) // Hello Cookielang!
 }
 ```
 I will omit the main function decleration for other parts in this documentation.

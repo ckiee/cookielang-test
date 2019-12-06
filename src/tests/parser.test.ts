@@ -19,12 +19,20 @@ test("it parses int", () => {
 test("it parses arg", () => {
     const ts = new TokenStream([
         new Token(TokenType.Identifier, "world"),
-        new Token(TokenType.SymbolColon, ":"),
         new Token(TokenType.KeywordMut, "mut"),
         new Token(TokenType.Identifier, "string")
     ]);
     const parser = new Parser(ts);
     expect(parser.parseArg()).toEqual(["world", new Type(true, "string")]);
+});
+
+test("it parses immutable arg", () => {
+    const ts = new TokenStream([
+        new Token(TokenType.Identifier, "world"),
+        new Token(TokenType.Identifier, "string")
+    ]);
+    const parser = new Parser(ts);
+    expect(parser.parseArg()).toEqual(["world", new Type(false, "string")]);
 });
 
 test("it parses type", () => {
@@ -41,7 +49,6 @@ test("it parses prototype", () => {
         new Token(TokenType.Identifier, "hello"),
         new Token(TokenType.SymbolOpenParen, "("),
         new Token(TokenType.Identifier, "world"),
-        new Token(TokenType.SymbolColon, ":"),
         new Token(TokenType.KeywordMut, "mut"),
         new Token(TokenType.Identifier, "string"),
         new Token(TokenType.SymbolCloseParen, ")"),
@@ -67,7 +74,6 @@ test("it parses function", () => {
         new Token(TokenType.Identifier, "main"),
         new Token(TokenType.SymbolOpenParen, "("),
         new Token(TokenType.Identifier, "world"),
-        new Token(TokenType.SymbolColon, ":"),
         new Token(TokenType.KeywordMut, "mut"),
         new Token(TokenType.Identifier, "string"),
         new Token(TokenType.SymbolCloseParen, ")"),

@@ -38,22 +38,22 @@ export default class Parser {
     parseType(): Type {
         // mut string OR string
         if (this.ts.get().type == TokenType.KeywordMut) {
-            return new Type(
-                true,
-                this.ts.next().expectType(TokenType.Identifier).match
-            );
+            const tv = this.ts.next().expectType(TokenType.Identifier).match;
+            this.ts.skipOver(TokenType.Identifier);
+            return new Type(true, tv);
         } else {
             const tv = this.ts.get().expectType(TokenType.Identifier).match;
-            this.ts.skip();
+            this.ts.skipOver(TokenType.Identifier);
             return new Type(false, tv);
         }
     }
     parseArg(): Arg {
-        // world: mut string
+        // world mut string
         const id = this.ts.get().expectType(TokenType.Identifier);
         this.ts.skip();
-        this.ts.skipOver(TokenType.SymbolColon);
-        return [id.match, this.parseType()];
+        // console.log(this.ts.get());
+        const type = this.parseType();
+        return [id.match, type];
     }
     parsePrototype(): Prototype {
         // hello (world: mut string) string
@@ -61,8 +61,10 @@ export default class Parser {
         this.ts.skip();
         this.ts.skipOver(TokenType.SymbolOpenParen);
         // TODO: Use while loop to parse optional arg(s).
-        const args = [this.parseArg()];
-        this.ts.skip();
+        const args: Arg[] = [];
+        while (this.ts.get().type !== TokenType.SymbolCloseParen) {
+            args.push(this.parseArg());
+        }
         this.ts.skipOver(TokenType.SymbolCloseParen);
         const returnType = this.parseType();
         return new Prototype(name.match, args, returnType);
@@ -72,7 +74,7 @@ export default class Parser {
         this.ts.skipOver(TokenType.SymbolOpenBrace);
         const statements: Statement[] = [];
         while (this.ts.get().type !== TokenType.SymbolCloseBrace) {
-            statements.push(this.parseStatement())
+            statements.push(this.parseStatement());
         }
         this.ts.skipOver(TokenType.SymbolCloseBrace);
         return new Block(statements);
@@ -93,7 +95,7 @@ export default class Parser {
                     return this.parseVarDeclareStatement();
                 }
             default:
-                throw new Error("unknown statement type")
+                throw new Error("unknown statement type");
         }
     }
     parseVarDeclareStatement(): VarDeclareStatement {
@@ -104,11 +106,7 @@ export default class Parser {
         this.ts.skipOver(TokenType.SymbolEqual);
         const value = this.parseValue();
         this.ts.skip();
-        return new VarDeclareStatement(
-            id.match,
-            type,
-            value
-        );
+        return new VarDeclareStatement(id.match, type, value);
     }
     parseValue(): Value {
         switch (this.ts.get().type) {
@@ -120,7 +118,7 @@ export default class Parser {
             // TODO: Missing decimal case.
 
             default:
-                throw new Error("unknown value type")
+                throw new Error("unknown value type");
         }
     }
 }

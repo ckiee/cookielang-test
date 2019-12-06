@@ -7,3 +7,7 @@ test("it emits C proto", () => {
     cgp.visitPrototype(new Prototype("main", [], new Type(true, "void")));
     expect(cgp.valueStack.pop()).toEqual("void main ( )")
 });
+
+test.todo("it emits fn")
+test.todo("it emits var declare")
+test.todo("it emits fn call")

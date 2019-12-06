@@ -41,8 +41,9 @@ enum CSymbol {
     Sharp = "#",
     Equal = "=",
     Bang = "!",
-    DubQuote = "\"",
-    SemiColon = ";"
+    DubQuote = '"',
+    SemiColon = ";",
+    Comma = ","
 }
 type CEntity = CSymbol | CKeyword | string
 type CType = CKeyword | string

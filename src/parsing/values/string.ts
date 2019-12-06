@@ -4,7 +4,7 @@ import Value, { ValueType } from "../value";
 
 export default class String extends Node implements Value {
     readonly value: string;
-    readonly valueType = ValueType.Int 
+    readonly valueType = ValueType.String 
     constructor(value: string) {
         super(NodeType.STRING);
         this.value = value;

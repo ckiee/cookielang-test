@@ -16,7 +16,7 @@
     "scripts": {
         "start": "ts-node src",
         "repl": "ts-node src/util/repl",
-        "test": "jest",
+        "test": "jest src",
         "postinstall": "tsc"
     }
 }

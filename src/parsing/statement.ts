@@ -1,7 +1,8 @@
 import Node, { NodeType } from "./node";
 
 enum StatementType {
-    VAR_DECLARE
+    VAR_DECLARE,
+    FN_CALL
 }
 export { StatementType };
 

@@ -1,7 +1,7 @@
 import TokenStream from "../util/tokenStream";
 import TokenType from "../lexing/tokenType";
 import Parser from "../parsing";
-import {Token} from "../lexing/lexer";
+import { Token } from "../lexing/lexer";
 import Type from "../parsing/type";
 import Int from "../parsing/values/int";
 import Prototype from "../parsing/prototype";
@@ -9,6 +9,7 @@ import String from "../parsing/values/string";
 import Function from "../parsing/function";
 import Block from "../parsing/block";
 import VarDeclareStatement from "../parsing/statements/vardeclare";
+import FunctionCallStatement from "../parsing/statements/fncall";
 
 test("it parses int", () => {
     const ts = new TokenStream([new Token(TokenType.Int, "100")]);
@@ -64,7 +65,7 @@ test("it parses prototype", () => {
     );
 });
 test("it parses string", () => {
-    const ts = new TokenStream([new Token(TokenType.String, `hello"`)]);
+    const ts = new TokenStream([new Token(TokenType.String, `"hello"`)]);
     const parser = new Parser(ts);
     expect(parser.parseString()).toEqual(new String("hello"));
 });
@@ -106,11 +107,22 @@ test("it parses block", () => {
     const parser = new Parser(ts);
     expect(parser.parseBlock()).toEqual(
         new Block([
-            new VarDeclareStatement(
-                "hi",
-                new Type(false, "int"),
-                new Int(123)
-            )
+            new VarDeclareStatement("hi", new Type(false, "int"), new Int(123))
         ])
+    );
+});
+
+test("it parses fn call", () => {
+    const ts = new TokenStream([
+        new Token(TokenType.Identifier, "bag"),
+        new Token(TokenType.SymbolOpenParen, "("),
+        new Token(TokenType.Int, "1337"),
+        new Token(TokenType.SymbolComma, ","),
+        new Token(TokenType.String, `"foo"`),
+        new Token(TokenType.SymbolCloseParen, ")")
+    ]);
+    const parser = new Parser(ts);
+    expect(parser.parseFnCallStatement()).toEqual(
+        new FunctionCallStatement("bag", [new Int(1337), new String("foo")])
     );
 });

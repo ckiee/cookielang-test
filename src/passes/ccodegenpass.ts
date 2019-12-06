@@ -4,20 +4,21 @@ import String from "../parsing/values/string";
 import Node from "../parsing/node";
 import Type from "../parsing/type";
 import Prototype from "../parsing/prototype";
-import Statement, {StatementType} from "../parsing/statement";
+import Statement, { StatementType } from "../parsing/statement";
 import Block from "../parsing/block";
 import Function from "../parsing/function";
 import CNode from "../ccodegen/cnode";
 import VarDeclareStatement from "../parsing/statements/vardeclare";
+import FunctionCallStatement from "../parsing/statements/fncall";
 
 export default class CCodeGenPass extends Pass {
     valueStack: string[] = [];
     visitInt(node: Int): Node {
-        this.valueStack.push(node.value.toString())
+        this.valueStack.push(node.value.toString());
         return node;
     }
     visitString(node: String): Node {
-        this.valueStack.push(CNode.string(node.value).toString())
+        this.valueStack.push(CNode.string(node).toString());
         return node;
     }
     //visitArg not needed
@@ -37,8 +38,10 @@ export default class CCodeGenPass extends Pass {
         switch (node.stmtType) {
             case StatementType.VAR_DECLARE:
                 return this.visitVarDeclareStmt(node as VarDeclareStatement);
+            case StatementType.FN_CALL:
+                return this.visitFnCallStmt(node as FunctionCallStatement);
             default:
-                throw new Error("unknown statement type")
+                throw new Error("unknown statement type");
         }
     }
     visitBlock(node: Block): Node {
@@ -50,9 +53,7 @@ export default class CCodeGenPass extends Pass {
             statements.push(this.valueStack.pop()!);
         }
 
-        this.valueStack.push(
-            CNode.block(statements).toString()
-        );
+        this.valueStack.push(CNode.block(statements).toString());
 
         return node;
     }
@@ -62,9 +63,7 @@ export default class CCodeGenPass extends Pass {
         this.visitBlock(node.block);
         const body = this.valueStack.pop()!;
 
-        this.valueStack.push(
-            CNode.fn(proto, body).toString()
-        );
+        this.valueStack.push(CNode.fn(proto, body).toString());
 
         return node;
     }
@@ -72,8 +71,16 @@ export default class CCodeGenPass extends Pass {
         // TODO: Need to visit node's props.
         this.valueStack.push(
             // TODO: hard-coded value
-            CNode.varDeclare(node.vType.value, node.id, "1337"/*node.value*/).toString()
+            CNode.varDeclare(
+                node.vType.value,
+                node.id,
+                "1337" /*node.value*/
+            ).toString()
         );
+        return node;
+    }
+    visitFnCallStmt(node: FunctionCallStatement): Node {
+        this.valueStack.push(CNode.fnCall(node.id, node.args));
         return node;
     }
 }

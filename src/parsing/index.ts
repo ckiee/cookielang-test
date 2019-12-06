@@ -12,6 +12,7 @@ import Node from "./node";
 import String from "./values/string";
 import Statement from "./statement";
 import Value from "./value";
+import FunctionCallStatement from "./statements/fncall";
 
 export default class Parser {
     ts: TokenStream;
@@ -33,7 +34,9 @@ export default class Parser {
 
     parseInt(): Int {
         // 1337
-        return new Int(parseInt(this.ts.get().match));
+        const res = parseInt(this.ts.get().match, 10);
+        this.ts.skip();
+        return new Int(res);
     }
     parseType(): Type {
         // mut string OR string
@@ -86,13 +89,17 @@ export default class Parser {
     }
     parseString(): String {
         const tok = this.ts.get().expectType(TokenType.String);
-        return new String(tok.match.slice(0, -1));
+        this.ts.skip();
+        return new String(tok.match.slice(1, -1));
     }
     parseStatement(): Statement {
         switch (this.ts.get().type) {
             case TokenType.Identifier:
                 if (this.ts.peek().type == TokenType.Identifier) {
                     return this.parseVarDeclareStatement();
+                }
+                if (this.ts.peek().type == TokenType.SymbolOpenParen) {
+                    return this.parseFnCallStatement();
                 }
             default:
                 throw new Error("unknown statement type");
@@ -102,11 +109,23 @@ export default class Parser {
         // int foobar [= 123]
         const type = this.parseType();
         const id = this.ts.get().expectType(TokenType.Identifier);
-        this.ts.next();
+        this.ts.skip();
         this.ts.skipOver(TokenType.SymbolEqual);
         const value = this.parseValue();
-        this.ts.skip();
         return new VarDeclareStatement(id.match, type, value);
+    }
+    parseFnCallStatement(): FunctionCallStatement {
+        const id = this.ts.get().expectType(TokenType.Identifier);
+        this.ts.skip();
+        this.ts.skipOver(TokenType.SymbolOpenParen);
+        const args: Value[] = [];
+        while (this.ts.get().type !== TokenType.SymbolCloseParen) {
+            args.push(this.parseValue());
+            if (this.ts.get().type !== TokenType.SymbolCloseParen)
+                this.ts.skipOver(TokenType.SymbolComma);
+        }
+        this.ts.skipOver(TokenType.SymbolCloseParen);
+        return new FunctionCallStatement(id.match, args);
     }
     parseValue(): Value {
         switch (this.ts.get().type) {
@@ -118,7 +137,7 @@ export default class Parser {
             // TODO: Missing decimal case.
 
             default:
-                throw new Error("unknown value type");
+                throw new Error("unknown value type " + this.ts.get().type);
         }
     }
 }

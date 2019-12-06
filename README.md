@@ -84,3 +84,9 @@ mut cool_langs = ["V", "Go", "Rust"]
 cool_langs.push("Cookielang")
 ```
 ### Maps
+```rust
+mut map = map[string]string {
+    "foo": "bar"
+}
+console.println(map.get("foo")) // Bar
+```

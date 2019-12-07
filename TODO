@@ -2,8 +2,10 @@
 
 Goals:
     ✔ comments @done()
-    ✔ functions @done
-    - variables @started()
+    ✔ functions @done()
+    - function args
+    - variable/arg consume
+    - modules
     - std lib
     - basic operators
     - string ops
@@ -15,5 +17,5 @@ Misc:
     ✔ refactor lexer TokenType @done(19-11-30 10:04)
     ✔ write tests for parser @started(19-11-30 10:20) @done(19-11-30 11:11) @lasted(51m51s)
     ✔ cleanup lexer tests @started(19-11-30 12:57) @done(19-11-30 13:08) @lasted(11m34s)
-    - write todo tests
+    ✔ write todo tests @done(19-12-07 21:24)
     - eradicate `as`

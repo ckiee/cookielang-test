@@ -62,8 +62,8 @@ if foo == bar {
     - `int64` 
 - `bool`
 - `float` (always 64 bit)
-- `str`
-- `map[str]str`
+- `string`
+- `map[string]string`
 ### Strings
 ```rust
 foo = "bar ball"

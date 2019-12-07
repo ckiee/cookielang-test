@@ -10,6 +10,7 @@ import Function from "../parsing/function";
 import Block from "../parsing/block";
 import VarDeclareStatement from "../parsing/statements/vardeclare";
 import FunctionCallStatement from "../parsing/statements/fncall";
+import Import from "../parsing/import";
 
 test("it parses int", () => {
     const ts = new TokenStream([new Token(TokenType.Int, "100")]);
@@ -127,4 +128,11 @@ test("it parses fn call", () => {
     );
 });
 
-test.todo("it parses import");
+test("it parses import", () => {
+    const ts = new TokenStream([
+        new Token(TokenType.KeywordImport, "import"),
+        new Token(TokenType.String, '"stdio.h"')
+    ]);
+    const parser = new Parser(ts);
+    expect(parser.parseImport()).toEqual(new Import(new String("stdio.h")));
+});

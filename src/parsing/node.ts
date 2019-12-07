@@ -10,7 +10,8 @@ export enum NodeType {
     STATEMENT = "statement",
     BLOCK = "block",
     FUNCTION = "function",
-    IMPORT = "import"
+    IMPORT = "import",
+    VAR_ACCESS = "varAccess"
 }
 
 export default abstract class Node {

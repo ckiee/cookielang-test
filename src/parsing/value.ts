@@ -3,7 +3,8 @@ import Node from "./node";
 enum ValueType {
     Int,
     String,
-    Decimal
+    Decimal,
+    VarAccess
 }
 export { ValueType }
 export default interface Value extends Node {

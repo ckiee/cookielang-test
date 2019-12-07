@@ -53,3 +53,4 @@ test("it emits import", () => {
     cgp.visitImport(new Import(new String("stdio.h")));
     expect(cgp.valueStack.pop()).toEqual(`#include "stdio.h"`);
 });
+test.todo("it emits var access");

@@ -10,6 +10,7 @@ import VarDeclareStatement from "../parsing/statements/vardeclare";
 import FunctionCallStatement from "../parsing/statements/fncall";
 import Import from "../parsing/import";
 import Arg from "../parsing/arg";
+import VarAccess from "../parsing/values/varAccess";
 
 // export enum NodeType {
 //     DECIMAL = "decimal", // TODO
@@ -56,6 +57,9 @@ export default abstract class Pass {
         return node;
     }
     visitTopLevel(node: Node): Node {
+        return node;
+    }
+    visitVarAccess(node: VarAccess): Node {
         return node;
     }
 }

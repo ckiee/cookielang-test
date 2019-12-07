@@ -136,3 +136,5 @@ test("it parses import", () => {
     const parser = new Parser(ts);
     expect(parser.parseImport()).toEqual(new Import(new String("stdio.h")));
 });
+
+test.todo("it parses var access")

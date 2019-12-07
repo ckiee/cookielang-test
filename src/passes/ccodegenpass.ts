@@ -12,6 +12,7 @@ import VarDeclareStatement from "../parsing/statements/vardeclare";
 import FunctionCallStatement from "../parsing/statements/fncall";
 import Import from "../parsing/import";
 import Arg from "../parsing/arg";
+import VarAccess from "../parsing/values/varAccess";
 
 export default class CCodeGenPass extends Pass {
     valueStack: string[] = [];
@@ -99,5 +100,9 @@ export default class CCodeGenPass extends Pass {
             default:
                 throw new Error("unknown top level nodetype");
         }
+    }
+    visitVarAccess(node: VarAccess): Node {
+        this.valueStack.push(node.id);
+        return node;
     }
 }

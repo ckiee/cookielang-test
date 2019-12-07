@@ -39,7 +39,7 @@ test("it emits var declare", () => {
             new String("test")
         )
     );
-    expect(cgp.valueStack.pop()).toEqual(`string test = "test"`);
+    expect(cgp.valueStack.pop()).toEqual(`string test = "test" ;`);
 });
 test("it emits fn call", () => {
     const cgp = new CCodeGenPass();

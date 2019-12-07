@@ -9,6 +9,7 @@ import Function from "../parsing/function";
 import VarDeclareStatement from "../parsing/statements/vardeclare";
 import FunctionCallStatement from "../parsing/statements/fncall";
 import Import from "../parsing/import";
+import Arg from "../parsing/arg";
 
 // export enum NodeType {
 //     DECIMAL = "decimal", // TODO

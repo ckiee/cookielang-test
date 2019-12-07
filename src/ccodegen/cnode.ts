@@ -7,12 +7,16 @@ import Int from "../parsing/values/int";
 import String from "../parsing/values/string";
 
 export default abstract class CNode {
-    static proto(returnType: CType, id: string) {
-        return new CBuilder()
+    static proto(returnType: CType, args: Arg[], id: string) {
+        const builder = new CBuilder()
             .add(returnType)
             .add(id)
-            .add(CSymbol.ParenL)
-            .add(CSymbol.ParenR);
+            .add(CSymbol.ParenL);
+        for (const arg of args) {
+            builder.add(arg[1].value).add(arg[0]);
+        }
+        builder.add(CSymbol.ParenR);
+        return builder.toString();
     }
     static type(type: Type) {
         return new CBuilder().add(type.value).toString();
@@ -60,10 +64,10 @@ export default abstract class CNode {
                 throw new Error("unknown valuetype");
         }
     }
-    static varDeclare(vType: string, id: string, value: string) {
+    static varDeclare(vType: string, id: string, value: Value) {
         const builder = new CBuilder().add(vType).add(id);
 
-        builder.add(CSymbol.Equal).add(value);
+        builder.add(CSymbol.Equal).add(this.value(value));
 
         return builder.add(CSymbol.SemiColon).toString();
     }

@@ -11,6 +11,7 @@ import CNode from "../ccodegen/cnode";
 import VarDeclareStatement from "../parsing/statements/vardeclare";
 import FunctionCallStatement from "../parsing/statements/fncall";
 import Import from "../parsing/import";
+import Arg from "../parsing/arg";
 
 export default class CCodeGenPass extends Pass {
     valueStack: string[] = [];
@@ -31,7 +32,7 @@ export default class CCodeGenPass extends Pass {
         this.visitType(node.returnType);
         // TODO: dont use !
         this.valueStack.push(
-            CNode.proto(this.valueStack.pop()!, node.name).toString()
+            CNode.proto(this.valueStack.pop()!, node.args, node.name).toString()
         );
         return node;
     }
@@ -72,10 +73,11 @@ export default class CCodeGenPass extends Pass {
         // TODO: Need to visit node's props.
         this.valueStack.push(
             // TODO: hard-coded value
+
             CNode.varDeclare(
                 node.vType.value,
                 node.id,
-                "1337" /*node.value*/
+                node.value /*node.value*/
             ).toString()
         );
         return node;
@@ -91,11 +93,11 @@ export default class CCodeGenPass extends Pass {
     visitTopLevel(node: Node): Node {
         switch (node.type) {
             case NodeType.FUNCTION:
-                return this.visitFunction(<Function> node);
+                return this.visitFunction(<Function>node);
             case NodeType.IMPORT:
-                return this.visitImport(<Import> node)
+                return this.visitImport(<Import>node);
             default:
-                throw new Error("unknown top level nodetype")
+                throw new Error("unknown top level nodetype");
         }
     }
 }

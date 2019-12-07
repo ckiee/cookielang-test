@@ -1,7 +1,19 @@
-✔ refactor Parser#parseType @started(19-11-30 10:14) @done(19-11-30 10:19) @lasted(5m59s)
-✔ refactor tokenstream @started(19-11-30 10:05) @done(19-11-30 10:19) @lasted(14m58s)
-✔ refactor lexer TokenType @done(19-11-30 10:04)
-✔ write tests for parser @started(19-11-30 10:20) @done(19-11-30 11:11) @lasted(51m51s)
-✔ cleanup lexer tests @started(19-11-30 12:57) @done(19-11-30 13:08) @lasted(11m34s)
-☐ write todo tests
-☐ eradicate `as`
+// Install https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-todo-plus to view with colors
+
+Goals:
+    ✔ comments @done()
+    ✔ functions @done
+    - variables @started()
+    - std lib
+    - basic operators
+    - string ops
+    - arrays
+    - maps
+Misc:
+    ✔ refactor Parser#parseType @started(19-11-30 10:14) @done(19-11-30 10:19) @lasted(5m59s)
+    ✔ refactor tokenstream @started(19-11-30 10:05) @done(19-11-30 10:19) @lasted(14m58s)
+    ✔ refactor lexer TokenType @done(19-11-30 10:04)
+    ✔ write tests for parser @started(19-11-30 10:20) @done(19-11-30 11:11) @lasted(51m51s)
+    ✔ cleanup lexer tests @started(19-11-30 12:57) @done(19-11-30 13:08) @lasted(11m34s)
+    - write todo tests
+    - eradicate `as`

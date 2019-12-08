@@ -1,12 +1,16 @@
-import Node from "./node";
+import Node, { NodeType } from "./node";
 
 enum ValueType {
     Int,
     String,
     Decimal,
-    VarAccess
+    Expr
 }
 export { ValueType }
-export default interface Value extends Node {
+export default abstract class Value extends Node {
     readonly valueType: ValueType
+    constructor(valueType: ValueType) {
+        super(NodeType.Value);
+        this.valueType = valueType;
+    }
 }

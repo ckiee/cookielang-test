@@ -2,8 +2,7 @@ import Pass from "../passes";
 
 export enum NodeType {
     Decimal = "decimal", // TODO
-    Int = "int",
-    String = "string",
+    Value = "value",
     Arg = "arg",
     Type = "type",
     Prototype = "prototype",
@@ -11,14 +10,13 @@ export enum NodeType {
     Block = "block",
     Function = "function",
     Import = "import",
-    VarAccess = "varAccess",
     ForwardDecleration = "forwardDecleration"
 }
 
 export default abstract class Node {
-    readonly type: NodeType;
+    readonly nodeType: NodeType;
     constructor(type: NodeType) {
-        this.type = type;
+        this.nodeType = type;
     }
     abstract accept(pass: Pass): Node
 }

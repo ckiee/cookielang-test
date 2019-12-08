@@ -14,7 +14,7 @@ import Statement from "./statement";
 import Value from "./value";
 import FunctionCallStatement from "./statements/fncall";
 import Import from "./import";
-import VarAccess from "./values/varAccess";
+import VariableRef from "./values/varRef";
 
 export default class Parser {
     ts: TokenStream;
@@ -137,15 +137,15 @@ export default class Parser {
             case TokenType.String:
                 return this.parseString();
             case TokenType.Identifier:
-                return this.parseVarAccess();
+                return this.parseVarRef();
             // TODO: Missing decimal case.
 
             default:
                 throw new Error("unknown value type " + this.ts.get().type);
         }
     }
-    parseVarAccess() {
-        const res = new VarAccess(
+    parseVarRef() {
+        const res = new VariableRef(
             this.ts.get().expectType(TokenType.Identifier).match
         );
         this.ts.skip();

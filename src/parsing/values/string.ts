@@ -2,11 +2,10 @@ import Node, { NodeType } from "../node";
 import Pass from "../../passes";
 import Value, { ValueType } from "../value";
 
-export default class String extends Node implements Value {
+export default class String extends Value {
     readonly value: string;
-    readonly valueType = ValueType.String 
     constructor(value: string) {
-        super(NodeType.String);
+        super(ValueType.String);
         this.value = value;
     }
     accept(pass: Pass): Node {

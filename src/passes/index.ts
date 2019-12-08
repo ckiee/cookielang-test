@@ -9,7 +9,7 @@ import Function from "../parsing/function";
 import VarDeclareStatement from "../parsing/statements/vardeclare";
 import FunctionCallStatement from "../parsing/statements/fncall";
 import Import from "../parsing/import";
-import VarAccess from "../parsing/values/varAccess";
+import VarAccess from "../parsing/values/varRef";
 import ForwardDecleration from "../parsing/forwardDecl";
 
 export default abstract class Pass {
@@ -47,7 +47,7 @@ export default abstract class Pass {
     visitTopLevel(node: Node): Node {
         return node;
     }
-    visitVarAccess(node: VarAccess): Node {
+    visitVarRef(node: VarAccess): Node {
         return node;
     }
     visitForwardDecl(node: ForwardDecleration): Node {

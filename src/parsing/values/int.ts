@@ -3,13 +3,12 @@ import BitSize from "../../util/bitsize";
 import Pass from "../../passes";
 import Value, { ValueType } from "../value";
 
-export default class Int extends Node implements Value {
+export default class Int extends Value {
     readonly size: BitSize;
     readonly signed: boolean;
     readonly value: number;
-    readonly valueType = ValueType.Int
     constructor(value: number, size: BitSize = BitSize.B32, signed: boolean = true) {
-        super(NodeType.Int);
+        super(ValueType.Int);
         this.size = size;
         this.signed = signed;
         this.value = value;

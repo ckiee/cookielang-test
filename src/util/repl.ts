@@ -63,7 +63,7 @@ async function repl() {
         if (shouldCCodeGen) {
             const ccodegenPass = new CCodeGenPass();
 
-            if (nodes.length == 0 || nodes[0].type !== NodeType.Function) {
+            if (nodes.length == 0 || nodes[0].nodeType !== NodeType.Function) {
                 throw new Error("No functions were parsed -- cannot codegen");
             }
 

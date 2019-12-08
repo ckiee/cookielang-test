@@ -5,7 +5,7 @@ import Type from "../parsing/type";
 import Value, { ValueType } from "../parsing/value";
 import Int from "../parsing/values/int";
 import String from "../parsing/values/string";
-import VarAccess from "../parsing/values/varAccess";
+import VarAccess from "../parsing/values/varRef";
 
 export default abstract class CNode {
     static proto(returnType: CType, args: Arg[], id: string) {
@@ -61,8 +61,7 @@ export default abstract class CNode {
                 return this.int(<Int>value);
             case ValueType.String:
                 return this.string(<String>value);
-            case ValueType.VarAccess:
-                return (<VarAccess>value).id;
+            // TODO: case ValueType.Expr: 
             default:
                 throw new Error("unknown valuetype");
         }

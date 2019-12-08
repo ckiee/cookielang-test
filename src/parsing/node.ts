@@ -1,18 +1,18 @@
 import Pass from "../passes";
 
 export enum NodeType {
-    DECIMAL = "decimal", // TODO
-    INT = "int",
-    STRING = "string",
-    ARG = "arg",
-    TYPE = "type",
-    PROTOTYPE = "prototype",
-    STATEMENT = "statement",
-    BLOCK = "block",
-    FUNCTION = "function",
-    IMPORT = "import",
-    VAR_ACCESS = "varAccess",
-    FORWARD_DECLERATION = "forwardDecl"
+    Decimal = "decimal", // TODO
+    Int = "int",
+    String = "string",
+    Arg = "arg",
+    Type = "type",
+    Prototype = "prototype",
+    Statement = "statement",
+    Block = "block",
+    Function = "function",
+    Import = "import",
+    VarAccess = "varAccess",
+    ForwardDecleration = "forwardDecleration"
 }
 
 export default abstract class Node {

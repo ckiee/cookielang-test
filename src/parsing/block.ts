@@ -5,7 +5,7 @@ import Pass from "../passes";
 export default class Block extends Node {
     readonly statements: Statement[]
     constructor(statements: Statement[]) {
-        super(NodeType.BLOCK);
+        super(NodeType.Block);
         this.statements = statements;
     }
     accept(pass: Pass): Node {

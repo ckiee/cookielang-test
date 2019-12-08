@@ -6,7 +6,7 @@ export default class Type extends Node {
     readonly value: string
     // TODO: Move mut arg to the end and refactor usage instances.
     constructor(mut: boolean = false, value: string) {
-        super(NodeType.TYPE);
+        super(NodeType.Type);
         this.value = value;
         this.mut = mut;
     }

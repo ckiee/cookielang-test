@@ -6,7 +6,7 @@ export default class VarAccess extends Node implements Value {
     readonly id: string;
     readonly valueType = ValueType.VarAccess 
     constructor(id: string) {
-        super(NodeType.VAR_ACCESS);
+        super(NodeType.VarAccess);
         this.id = id;
     }
     accept(pass: Pass): Node {

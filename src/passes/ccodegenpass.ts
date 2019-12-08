@@ -40,9 +40,9 @@ export default class CCodeGenPass extends Pass {
     }
     visitStatement(node: Statement): Node {
         switch (node.stmtType) {
-            case StatementType.VAR_DECLARE:
+            case StatementType.VarDeclare:
                 return this.visitVarDeclareStmt(node as VarDeclareStatement);
-            case StatementType.FN_CALL:
+            case StatementType.FnCall:
                 return this.visitFnCallStmt(node as FunctionCallStatement);
             default:
                 throw new Error("unknown statement type");
@@ -94,9 +94,9 @@ export default class CCodeGenPass extends Pass {
     }
     visitTopLevel(node: Node): Node {
         switch (node.type) {
-            case NodeType.FUNCTION:
+            case NodeType.Function:
                 return this.visitFunction(<Function>node);
-            case NodeType.IMPORT:
+            case NodeType.Import:
                 return this.visitImport(<Import>node);
             default:
                 throw new Error("unknown top level nodetype");

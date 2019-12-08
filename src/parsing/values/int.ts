@@ -9,7 +9,7 @@ export default class Int extends Node implements Value {
     readonly value: number;
     readonly valueType = ValueType.Int
     constructor(value: number, size: BitSize = BitSize.B32, signed: boolean = true) {
-        super(NodeType.INT);
+        super(NodeType.Int);
         this.size = size;
         this.signed = signed;
         this.value = value;

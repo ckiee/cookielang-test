@@ -10,7 +10,7 @@ export default class VarDeclareStatement extends Statement {
     readonly value: Value;
     constructor(id: string, vType: Type, value: Value) {
         // TODO: make value arg less general
-        super(StatementType.VAR_DECLARE);
+        super(StatementType.VarDeclare);
         this.id = id;
         this.vType = vType;
         this.value = value;

@@ -7,7 +7,7 @@ export default class Function extends Node {
     readonly proto: Prototype;
     readonly block: Block;
     constructor(proto: Prototype, block: Block) {
-        super(NodeType.FUNCTION);
+        super(NodeType.Function);
         this.proto = proto;
         this.block = block;
     }

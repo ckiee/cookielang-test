@@ -1,15 +1,15 @@
 import Node, { NodeType } from "./node";
 
 enum StatementType {
-    VAR_DECLARE,
-    FN_CALL
+    VarDeclare,
+    FnCall
 }
 export { StatementType };
 
 export default abstract class Statement extends Node {
     stmtType: StatementType;
     constructor(stmtType: StatementType) {
-        super(NodeType.STATEMENT);
+        super(NodeType.Statement);
         this.stmtType = stmtType;
     }
 }

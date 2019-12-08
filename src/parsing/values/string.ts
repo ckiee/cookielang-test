@@ -6,7 +6,7 @@ export default class String extends Node implements Value {
     readonly value: string;
     readonly valueType = ValueType.String 
     constructor(value: string) {
-        super(NodeType.STRING);
+        super(NodeType.String);
         this.value = value;
     }
     accept(pass: Pass): Node {

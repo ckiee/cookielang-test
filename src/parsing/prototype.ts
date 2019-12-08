@@ -8,7 +8,7 @@ export default class Prototype extends Node {
     readonly args: Arg[];
     readonly returnType: Type;
     constructor(name: string, args: Arg[], returnType: Type) {
-        super(NodeType.PROTOTYPE);
+        super(NodeType.Prototype);
         this.name = name;
         this.args = args;
         this.returnType = returnType;

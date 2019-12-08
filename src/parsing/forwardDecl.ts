@@ -7,7 +7,7 @@ import Prototype from "./prototype";
 export default class ForwardDecleration extends Node {
     readonly proto: Prototype;
     constructor(proto: Prototype) {
-        super(NodeType.FORWARD_DECLERATION);
+        super(NodeType.ForwardDecleration);
         this.proto = proto;
     }
     accept(pass: Pass): Node {

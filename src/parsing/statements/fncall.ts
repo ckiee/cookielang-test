@@ -10,7 +10,7 @@ export default class FunctionCallStatement extends Statement {
     readonly args: Value[]
     constructor(id: string, args: Value[]) {
         // TODO: make value arg less general
-        super(StatementType.FN_CALL);
+        super(StatementType.FnCall);
         this.id = id;
         this.args = args;
     }

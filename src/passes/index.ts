@@ -9,21 +9,8 @@ import Function from "../parsing/function";
 import VarDeclareStatement from "../parsing/statements/vardeclare";
 import FunctionCallStatement from "../parsing/statements/fncall";
 import Import from "../parsing/import";
-import Arg from "../parsing/arg";
 import VarAccess from "../parsing/values/varAccess";
 import ForwardDecleration from "../parsing/forwardDecl";
-
-// export enum NodeType {
-//     DECIMAL = "decimal", // TODO
-//     INT = "int",
-//     STRING = "string",
-//     ARG = "arg",
-//     TYPE = "type",
-//     PROTOTYPE = "prototype",
-//     STATEMENT = "statement",
-//     BLOCK = "block",
-//     FUNCTION = "function"
-// }
 
 export default abstract class Pass {
     visitInt(node: Int): Node {

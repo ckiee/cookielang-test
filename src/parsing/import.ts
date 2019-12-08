@@ -6,7 +6,7 @@ export default class Import extends Node {
     readonly file: String
     readonly c: boolean
     constructor(file: String, c: boolean = true) {
-        super(NodeType.IMPORT);
+        super(NodeType.Import);
         this.file = file;
         this.c = c;
     }

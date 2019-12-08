@@ -13,6 +13,7 @@ import FunctionCallStatement from "../parsing/statements/fncall";
 import Import from "../parsing/import";
 import Arg from "../parsing/arg";
 import VarAccess from "../parsing/values/varAccess";
+import ForwardDecleration from "../parsing/forwardDecl";
 
 export default class CCodeGenPass extends Pass {
     valueStack: string[] = [];
@@ -103,6 +104,10 @@ export default class CCodeGenPass extends Pass {
     }
     visitVarAccess(node: VarAccess): Node {
         this.valueStack.push(node.id);
+        return node;
+    }
+    visitForwardDecl(node: ForwardDecleration): Node {
+        this.visitPrototype(node.proto);
         return node;
     }
 }

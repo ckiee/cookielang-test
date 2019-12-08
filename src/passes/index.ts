@@ -11,6 +11,7 @@ import FunctionCallStatement from "../parsing/statements/fncall";
 import Import from "../parsing/import";
 import Arg from "../parsing/arg";
 import VarAccess from "../parsing/values/varAccess";
+import ForwardDecleration from "../parsing/forwardDecl";
 
 // export enum NodeType {
 //     DECIMAL = "decimal", // TODO
@@ -60,6 +61,9 @@ export default abstract class Pass {
         return node;
     }
     visitVarAccess(node: VarAccess): Node {
+        return node;
+    }
+    visitForwardDecl(node: ForwardDecleration): Node {
         return node;
     }
 }

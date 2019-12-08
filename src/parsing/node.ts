@@ -11,7 +11,8 @@ export enum NodeType {
     BLOCK = "block",
     FUNCTION = "function",
     IMPORT = "import",
-    VAR_ACCESS = "varAccess"
+    VAR_ACCESS = "varAccess",
+    FORWARD_DECLERATION = "forwardDecl"
 }
 
 export default abstract class Node {

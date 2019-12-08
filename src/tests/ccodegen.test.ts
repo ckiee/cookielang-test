@@ -8,6 +8,7 @@ import Int from "../parsing/values/int";
 import String from "../parsing/values/string";
 import FunctionCallStatement from "../parsing/statements/fncall";
 import Import from "../parsing/import";
+import ForwardDecleration from "../parsing/forwardDecl";
 
 test("it emits C proto", () => {
     const cgp = new CCodeGenPass();
@@ -53,4 +54,15 @@ test("it emits import", () => {
     cgp.visitImport(new Import(new String("stdio.h")));
     expect(cgp.valueStack.pop()).toEqual(`#include "stdio.h"`);
 });
+
 test.todo("it emits var access");
+
+test("it emits forward decl", () => {
+    const cgp = new CCodeGenPass();
+    cgp.visitForwardDecl(
+        new ForwardDecleration(
+            new Prototype("main", [], new Type(true, "void"))
+        )
+    );
+    expect(cgp.valueStack.pop()).toEqual("void main ( )");
+});

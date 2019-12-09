@@ -9,6 +9,7 @@ import String from "../parsing/values/string";
 import FunctionCallStatement from "../parsing/statements/fncall";
 import Import from "../parsing/import";
 import ForwardDecleration from "../parsing/forwardDecl";
+import VariableRef from "../parsing/values/varRef";
 
 test("it emits C proto", () => {
     const cgp = new CCodeGenPass();
@@ -55,7 +56,11 @@ test("it emits import", () => {
     expect(cgp.valueStack.pop()).toEqual(`#include "stdio.h"`);
 });
 
-test.todo("it emits var access");
+test("it emits var ref", () => {
+    const cgp = new CCodeGenPass();
+    cgp.visitVarRef(new VariableRef("foo"));
+    expect(cgp.valueStack.pop()).toEqual("foo");
+});
 
 test("it emits forward decl", () => {
     const cgp = new CCodeGenPass();

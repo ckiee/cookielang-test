@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
-	"author": "RONTheCookie <me@ronthecookie.me>",
+	"author": "Ron B <me@ronthecookie.me>",
 	"license": "GPL-3.0",
 	"dependencies": {
 		"@types/jest": "^24.0.23",
@@ -16,10 +16,10 @@
 		"typescript": "^3.6.3"
 	},
 	"scripts": {
-		"start": "ts-node src",
 		"repl": "ts-node src/util/repl",
 		"test": "jest src",
-		"postinstall": "tsc"
+		"postinstall": "tsc",
+		"coverage": "jest src --coverage"
 	},
 	"bin": "cli.js"
 }
